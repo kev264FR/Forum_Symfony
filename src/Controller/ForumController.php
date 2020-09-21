@@ -277,8 +277,4 @@ class ForumController extends AbstractController
         return $this->redirectToRoute("categories");
     }
 
-    
-    public function test(){
-        
-    }
 }
