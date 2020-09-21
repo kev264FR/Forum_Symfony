@@ -1,0 +1,3 @@
+[submodule "public/js/jquery.confirm"]
+	path = public/js/jquery.confirm
+	url = https://github.com/myclabs/jquery.confirm.git
