@@ -1,0 +1,25 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Ajouter un topic{{categorie.name}}{% endblock %}
+
+{% block body %}
+
+    <h1>Nouveau topic</h1>
+
+    <p> Rappel : vous ètes dans la categorie <strong>{{categorie.name}}</strong> </p>
+
+    {{form_start(form)}}
+
+        <div class="form-group">
+            {{form_row(form.title)}}
+        </div>
+
+        <div class="form-group">
+            {{form_row(form.text)}}
+        </div>
+
+        <input class="btn btn-success" type="submit" value="Ajouter">
+
+    {{form_end(form)}}
+
+{% endblock %}

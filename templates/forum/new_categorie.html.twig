@@ -1,0 +1,25 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+    <h1>Ajouter une categorie</h1>
+
+    {{form_start(form)}}
+
+        <div class="form-group">
+            {{form_row(form.name)}}
+        </div>
+
+        <div class="form-group">
+            {{form_row(form.description)}}
+        </div>
+
+        <div class="form-group">
+            {{form_row(form.image)}}
+        </div>
+
+        <input class="btn btn-success" type="submit" value="Ajouter">
+
+    {{form_end(form)}}
+
+{% endblock %}

@@ -1,0 +1,7 @@
+# config/packages/white_october_breadcrumbs.yaml
+white_october_breadcrumbs: 
+    separator:          ""
+    separatorClass:     'separator'
+    listId:             ''
+    listClass:          'breadcrumb'
+    itemClass:          'breadcrumb-item'

@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste Topics pour la categorie {{categorie.name}}{% endblock %}
+
+{% block body %}
+
+    <h1>Liste Topics pour la categorie {{categorie.name}}</h1>
+
+    <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Titre</th>
+            <th>Créé par</th>
+            <th>Cloturé</th>
+            <th>
+                <a href="{{path("new_topic", {id: categorie.id})}}">Créé un Topic</a>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for topic in categorie.topics %}
+                <tr class="table-light">
+                    <th scope="row">
+                        <a href="{{path("posts_in_topic", {id:topic.id})}}">{{topic.title}}</a>
+                    </th>
+                    <td>{{topic.user.username}}</td>
+                    <td>
+                        {% if topic.locked %}
+                            <i class="fas fa-lock"></i>
+                            {% else %}
+                            <i class="fas fa-unlock"></i>                               
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if app.user %}
+                            {% if app.user.role("ROLE_ADMIN") %}
+                                <a class="confirm btn btn-danger btn-sm" href="{{path("delete_topic", {id:topic.id})}}">Supprimer</a>
+                                {% if topic.locked %}
+                                        <a class="btn btn-secondary btn-sm" href="{{path("unlock_topic", {id: topic.id})}}">Ouvrir</a>
+                                    {% else %}
+                                        <a class="btn btn-secondary btn-sm" href="{{path("lock_topic", {id: topic.id})}}">Cloturé</a>
+                                {% endif %} 
+                            {% endif %}
+                            {% if app.user == topic.user and not app.user.role("ROLE_ADMIN") %}
+                                {% if not topic.locked %}
+                                        <a class="confirm btn btn-danger btn-sm" href="{{path("lock_topic", {id: topic.id})}}">Cloturé</a>
+                                        
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}

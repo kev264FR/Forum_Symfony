@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des categories{% endblock %}
+
+{% block body %}
+
+    <h1>Liste des categories</h1>
+
+    {% if app.user and app.user.role("ROLE_ADMIN") %}
+        <a class="btn-bot-10 btn btn-info" href="{{path("add_categorie")}}">Ajouter une categorie</a>
+    {% endif %}
+    
+
+
+    <div id="cards">
+        {% for categorie in categories %}
+            <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+                <div class="card-header">
+                    <img class="card-img" src="{{categorie.image}}" alt="">
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">{{categorie.name}}</h4>
+                    <p class="card-text">{{categorie.description}}</p>
+                    {% if app.user and app.user.role("ROLE_ADMIN") %}
+                        <a class="confirm btn btn-danger btn-sm" href="{{path("delete_categorie", {id: categorie.id})}}">Supprimer la categorrie</a>
+                    {% endif %}
+                </div>
+                <a class="btn btn-dark" href="{{path("topics_in_categorie", {id: categorie.id})}}">Voir cette categorie</a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,23 @@
+.user-form{
+    width: 400px;
+    margin: auto;
+}
+
+h1{
+    text-align: center;
+}
+
+#cards{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.btn-bot-10{
+    margin-bottom: 10px;
+}
+
+#wrapper{
+    width: 900px;
+    margin: auto;
+}

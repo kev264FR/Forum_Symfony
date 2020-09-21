@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+    <h1>Editer un message</h1>
+
+    {{form_start(form)}}
+
+        <div class="form-group">
+            {{form_row(form.text)}}
+        </div>
+
+        <input class="btn btn-info" type="submit" value="Modifier">
+    {{form_end(form)}}
+{% endblock %}

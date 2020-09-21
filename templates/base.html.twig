@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}{% endblock %}</title>
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{asset("css/animation.css")}}">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+            <link rel="stylesheet" href="{{asset("css/bootstrap.min.css")}}">
+            <link rel="stylesheet" href="{{asset("css/style.css")}}">
+        {% endblock %}
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a id="logo" class="navbar-brand rotate-center" href="#"><i class="fab fa-envira fa-2x"></i></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarColor02">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{path("home")}}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{path("categories")}}">Categories</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+
+                    {% if app.user %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{path("app_logout")}}">Se déconnecter</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="{{path("profile")}}">{{ app.user.username }}</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{path("app_login")}}">Se connecter</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{path("app_register")}}">S'inscrire</a>
+                        </li>
+                    {% endif %}
+                        
+                </ul>
+            </div>
+        </nav>
+        <div id="wrapper">
+            {% for message in app.flashes("error") %}
+                <div class="alert alert-danger">{{ message }}</div>
+            {% endfor %}
+            {% for message in app.flashes("success") %}
+                <div class="alert alert-success">{{ message }}</div>
+            {% endfor %}
+
+            {{ wo_render_breadcrumbs() }}
+            
+
+            {% block body %}
+            {% endblock %}
+            
+            {% block javascripts %}
+                <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+                <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+                <script src="{{asset("js/jquery.confirm.js")}}"></script>
+                <script src="{{asset("js/js.js")}}"></script>
+
+                <script src="https://cdn.tiny.cloud/1/lpsailzy3bs8l5rbig0nrd0f71a1dh6t0drwr8xi95z7r8uf/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+                <script>tinymce.init({
+                    selector:'.tiny',
+                    setup: function (editor) {
+                        editor.on('change', function () {
+                            tinymce.triggerSave();
+                            protect: [
+                                /\<\/?(if|endif)\>/g,  // Protect <if> & </endif>
+                                /\<xsl\:[^>]+\>/g,  // Protect <xsl:...>
+                                /<\?php.*?\?>/g  // Protect php code
+                            ]
+                        });
+                    }
+                });</script>
+            {% endblock %}
+        </div>
+    </body>
+</html>
