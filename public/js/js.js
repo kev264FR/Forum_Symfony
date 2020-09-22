@@ -5,12 +5,12 @@ $("#logo").click(function(){
 $.confirm.options = {
     text: "Cette action est définitive, voulez vous continuer ?",
     title: "",
-    confirmButton: "Oui",
-    cancelButton: "Non",
+    confirmButton: "Oui continuer",
+    cancelButton: "Non, revenir en arrière",
     post: false,
     submitForm: false,
-    confirmButtonClass: "btn-danger",
-    cancelButtonClass: "btn-info",
+    confirmButtonClass: "btn-warning",
+    cancelButtonClass: "btn-secondary",
     dialogClass: "modal-dialog"
 }
 
