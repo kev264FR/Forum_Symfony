@@ -15,5 +15,3 @@ $.confirm.options = {
 }
 
 $(".confirm").confirm()
-
-$("#test").confirm()
